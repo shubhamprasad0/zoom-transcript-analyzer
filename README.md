@@ -17,7 +17,7 @@ Analyze and extract relevant information from zoom transcripts
 
 - **Step 1: OAuth Setup**
   - [x] Initialize next app
-  - [ ] Create UI with button to authenticate with zoom
-  - [ ] Create app on zoom marketplace for oauth
+  - [x] Create UI with button to authenticate with zoom
+  - [x] Create app on zoom marketplace for oauth
   - [ ] Complete frontend flow to get authorization code from zoom using oauth
   - [ ] Create backend endpoint to get access token from zoom
