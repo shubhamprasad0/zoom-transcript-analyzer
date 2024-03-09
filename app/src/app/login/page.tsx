@@ -8,10 +8,24 @@ export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
+    const getToken = async (code: string) => {
+      const res = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({ code }),
+      });
+      return res.json();
+    };
+
     const code = searchParams.get("code");
     if (code) {
-      console.log(code);
-      // TODO: send request to backend with the code
+      getToken(code)
+        .then(({ token }) => {
+          console.log(token);
+          // TODO: save token in cookie
+        })
+        .catch((err) => {
+          console.log("Error in login: ", err);
+        });
     }
     router.push("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
