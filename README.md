@@ -12,3 +12,12 @@ Analyze and extract relevant information from zoom transcripts
 - Frontend can then ask the backend to extract questions out of the transcript using another backend endpoint (say `GET /transcripts/{id}/questions`). The js backend calls the python service to do the actual operation. The python service fetches the transcript from mongodb, runs its NLP algorithm(s) over the transcript and then returns the extracted questions to the js backend. The js backend then forwards them to the frontend for rendering.
 - The python service can use NLP text processing libraries like spacy / NLTK to extract sentences from the transcript. It can then detect question words like "What", "Where", "How", "When", etc. to figure out if the sentence is a question. First target is to complete the application end-to-end using this heuristic model, and then improve upon it using some advanced pretrained NLP models like BERT (if available for this task). Once we have extracted sentences from the transcript, it can be seen as a classification task of whether a sentence is a question or not. I still need to figure out if I can find an open source pretrained model for this task, or do I need to train such a model on my own. Will try to avoid training model as of now due to time constraints, as I'll need to prepare a dataset first. Will take the model related decision after seeing how the heuristic algorithm works in practice.
 - I plan to dockerize these applications and provide a docker compose file so that it's easy to start and stop the services. It will also make getting started on the project easier.
+
+# TODOs
+
+- **Step 1: OAuth Setup**
+  - [x] Initialize next app
+  - [ ] Create UI with button to authenticate with zoom
+  - [ ] Create app on zoom marketplace for oauth
+  - [ ] Complete frontend flow to get authorization code from zoom using oauth
+  - [ ] Create backend endpoint to get access token from zoom
