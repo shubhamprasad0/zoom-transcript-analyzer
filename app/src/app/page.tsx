@@ -6,7 +6,6 @@ export default function Home() {
   const router = useRouter();
 
   const onZoomLoginClick = () => {
-    console.log("Logging in with zoom...");
     const ZOOM_AUTH_URL = process.env.NEXT_PUBLIC_ZOOM_AUTH_URL;
     if (!ZOOM_AUTH_URL) {
       throw new Error("Could not find zoom auth url in environment!");
