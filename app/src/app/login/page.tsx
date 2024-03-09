@@ -21,7 +21,6 @@ export default function Login() {
       getToken(code)
         .then(({ token }) => {
           console.log(token);
-          // TODO: save token in cookie
         })
         .catch((err) => {
           console.log("Error in login: ", err);
