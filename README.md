@@ -29,6 +29,6 @@ Analyze and extract relevant information from zoom transcripts
   - [x] Create backend endpoint to get transcript url from zoom API.
   - [x] Save transcript url in browser local storage.
   - [x] Download transcript using URL and show trannscript on the frontend.
-  - [ ] Create python service with question identification algorithm (dummy for now)
-  - [ ] Pass this transcript url to python service and extract questions from the transcript. (Plan was to save transcript in a database, and have a separate backend endpoint to get questions using the transcript's id stored in the db. Skipping database now due to time constraint.)
-  - [ ] Get questions from python service and return the questions to the frontend.
+  - [ ] Parse transcript into sentences
+  - [ ] Use huggingface inference api for facebook/bart-large-mnli model to classify sentences into question or not question.
+  - [ ] Return response to client and render on frontend accordingly.

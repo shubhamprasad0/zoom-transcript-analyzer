@@ -10,7 +10,7 @@ const MeetingIDForm = () => {
   const onSubmit = async () => {
     const url = `/api/transcripts?meeting_id=${meetingID}`;
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { cache: "no-store" });
       if (res.ok) {
         const resData = await res.json();
         setTranscript(resData.transcript);

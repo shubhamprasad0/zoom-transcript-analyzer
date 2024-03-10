@@ -58,8 +58,50 @@ export async function GET(request: NextRequest) {
     }),
   });
   const transcriptText = await transcriptResponse.text();
+  const sentences = extractSentencesFromVTT(transcriptText);
 
   return new Response(
-    JSON.stringify({ msg: "success", transcript: transcriptText })
+    JSON.stringify({
+      msg: "success",
+      transcript: transcriptText,
+      questions: sentences,
+    })
   );
+}
+
+function extractSentencesFromVTT(vtt: string): string[] {
+  // Remove the WEBVTT header, timestamps, and any empty lines
+  const dialogueLines = vtt.replace(
+    /WEBVTT\n\n|\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}\n/g,
+    ""
+  );
+
+  // Split by line breaks to get individual lines
+  let lines = dialogueLines.split("\n");
+
+  // Combine lines to form the complete dialogue for each speaker
+  let combinedLines = [];
+  let currentLine = "";
+  lines.forEach((line) => {
+    if (/^\d+$/.test(line)) {
+      // Skip line numbers
+      return;
+    } else if (/[A-Za-z]+ [A-Za-z]+:/.test(line)) {
+      // Speaker line
+      if (currentLine) {
+        combinedLines.push(currentLine);
+        currentLine = line;
+      } else {
+        currentLine = line;
+      }
+    } else {
+      currentLine += " " + line; // Continuation of a speaker's dialogue
+    }
+  });
+  if (currentLine) {
+    // Add the last accumulated line
+    combinedLines.push(currentLine);
+  }
+
+  return combinedLines;
 }
