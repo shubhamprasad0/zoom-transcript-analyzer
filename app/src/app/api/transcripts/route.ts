@@ -60,11 +60,38 @@ export async function GET(request: NextRequest) {
   const transcriptText = await transcriptResponse.text();
   const sentences = extractSentencesFromVTT(transcriptText);
 
+  const classifySentences = async (payload: any) => {
+    const response = await fetch(
+      "https://api-inference.huggingface.co/models/facebook/bart-large-mnli",
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.HUGGINFACE_TOKEN}`,
+        },
+        method: "POST",
+        body: JSON.stringify(payload),
+      }
+    );
+    const result = await response.json();
+    return result;
+  };
+
+  const modelOutput = await classifySentences({
+    inputs: sentences,
+    parameters: { candidate_labels: ["question", "not_question"] },
+  });
+  const questions = [];
+  for (let output of modelOutput) {
+    if (output.scores[0] > 0.8) {
+      questions.push(output.sequence);
+    }
+  }
+
   return new Response(
     JSON.stringify({
       msg: "success",
       transcript: transcriptText,
-      questions: sentences,
+      questions: questions,
+      modelOutput: modelOutput,
     })
   );
 }
@@ -72,15 +99,15 @@ export async function GET(request: NextRequest) {
 function extractSentencesFromVTT(vtt: string): string[] {
   // Remove the WEBVTT header, timestamps, and any empty lines
   const dialogueLines = vtt.replace(
-    /WEBVTT\n\n|\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}\n/g,
+    /WEBVTT\r\n|\d{2}:\d{2}:\d{2}\.\d{3} --> \d{2}:\d{2}:\d{2}\.\d{3}\r\n/g,
     ""
   );
 
   // Split by line breaks to get individual lines
-  let lines = dialogueLines.split("\n");
+  let lines = dialogueLines.split("\r\n");
 
   // Combine lines to form the complete dialogue for each speaker
-  let combinedLines = [];
+  let sentences = [];
   let currentLine = "";
   lines.forEach((line) => {
     if (/^\d+$/.test(line)) {
@@ -89,7 +116,7 @@ function extractSentencesFromVTT(vtt: string): string[] {
     } else if (/[A-Za-z]+ [A-Za-z]+:/.test(line)) {
       // Speaker line
       if (currentLine) {
-        combinedLines.push(currentLine);
+        sentences.push(currentLine.trim());
         currentLine = line;
       } else {
         currentLine = line;
@@ -100,8 +127,10 @@ function extractSentencesFromVTT(vtt: string): string[] {
   });
   if (currentLine) {
     // Add the last accumulated line
-    combinedLines.push(currentLine);
+    sentences.push(currentLine.trim());
   }
 
-  return combinedLines;
+  sentences = sentences.filter((line) => line !== "");
+
+  return sentences;
 }

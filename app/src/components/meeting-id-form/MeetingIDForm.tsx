@@ -9,6 +9,8 @@ const MeetingIDForm = () => {
   const [, setQuestions] = useLocalStorage("questions", []);
 
   const onSubmit = async () => {
+    setTranscript("");
+    setQuestions([]);
     const url = `/api/transcripts?meeting_id=${meetingID}`;
     try {
       const res = await fetch(url, { cache: "no-store" });
