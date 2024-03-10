@@ -29,6 +29,8 @@ Analyze and extract relevant information from zoom transcripts
   - [x] Create backend endpoint to get transcript url from zoom API.
   - [x] Save transcript url in browser local storage.
   - [x] Download transcript using URL and show trannscript on the frontend.
-  - [ ] Parse transcript into sentences
-  - [ ] Use huggingface inference api for facebook/bart-large-mnli model to classify sentences into question or not question.
-  - [ ] Return response to client and render on frontend accordingly.
+  - [x] Parse transcript into sentences
+  - [x] Use huggingface inference api for facebook/bart-large-mnli model to classify sentences into question or not question.
+  - [x] Return response to client and render on frontend accordingly.
+  - [ ] Fix UI; remove dependence on local storage and directly use response result to render.
+  - [ ] Break dialogues into smaller sentences before passing to model.
