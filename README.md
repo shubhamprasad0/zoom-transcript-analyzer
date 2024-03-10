@@ -34,5 +34,10 @@ Analyze and extract relevant information from zoom transcripts
   - [x] Return response to client and render on frontend accordingly.
   - [x] Fix UI; remove dependence on local storage and directly use response result to render.
   - [x] Fix login issue in which it is still redirected to page with login button even after login; (user has to refresh to go to correct state)
-  - [ ] Fix build error for deployment on vercel.
+  - [x] Fix build error for deployment on vercel.
   - [ ] Break dialogues into smaller sentences before passing to model.
+
+  - **Step 3: Improve usability**
+    - [ ] Write doc for local setup and usage
+    - [ ] Fix cookie not set error in vercel deployment
+    - [ ] Write improvements needed
