@@ -18,11 +18,15 @@ export default function Login() {
 
     const code = searchParams.get("code");
     if (code) {
-      getToken(code).catch((err) => {
-        console.log("Error in login: ", err);
-      });
+      getToken(code)
+        .then(() => {
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log("Error in login: ", err);
+          router.push("/");
+        });
     }
-    router.push("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 

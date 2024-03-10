@@ -33,6 +33,6 @@ Analyze and extract relevant information from zoom transcripts
   - [x] Use huggingface inference api for facebook/bart-large-mnli model to classify sentences into question or not question.
   - [x] Return response to client and render on frontend accordingly.
   - [x] Fix UI; remove dependence on local storage and directly use response result to render.
-  - [ ] Fix login issue in which two login requests are issued, and page is still redirected to page with login button even after login; (user has to refresh to go to correct state)
+  - [x] Fix login issue in which it is still redirected to page with login button even after login; (user has to refresh to go to correct state)
   - [ ] Fix build error for deployment on vercel.
   - [ ] Break dialogues into smaller sentences before passing to model.
