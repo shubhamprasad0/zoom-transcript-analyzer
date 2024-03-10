@@ -1,12 +1,26 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import useLocalStorage from "@/hooks/use-local-storage";
 
 const MeetingIDForm = () => {
   const [meetingID, setMeetingID] = useState("");
+  const [transcriptUrl, setTranscriptUrl] = useLocalStorage(
+    "transcript_url",
+    ""
+  );
 
-  const onSubmit = () => {
-    console.log(meetingID);
+  const onSubmit = async () => {
+    const url = `/api/transcripts?meeting_id=${meetingID}`;
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const resData = await res.json();
+        setTranscriptUrl(resData.url);
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
