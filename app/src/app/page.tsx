@@ -1,5 +1,6 @@
 "use client";
 import MeetingIDForm from "@/components/meeting-id-form/MeetingIDForm";
+import QuestionsList from "@/components/questions-list/QuestionsList";
 import TranscriptViewer from "@/components/transcript-viewer/TranscriptViewer";
 import { Button } from "@/components/ui/button";
 import useCookie from "@/hooks/use-cookie";
@@ -28,6 +29,7 @@ export default function Home() {
           <>
             <MeetingIDForm />
             <TranscriptViewer />
+            <QuestionsList />
           </>
         )}
       </div>
