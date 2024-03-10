@@ -5,7 +5,7 @@ const TranscriptViewer = () => {
 
   return (
     <>
-      <h1>Transcript</h1>
+      <h1 className="text-2xl font-bold">Transcript</h1>
       <p>{transcript}</p>
     </>
   );
