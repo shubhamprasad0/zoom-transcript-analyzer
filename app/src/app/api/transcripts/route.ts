@@ -52,6 +52,14 @@ export async function GET(request: NextRequest) {
   }
 
   const transcriptUrl = transcriptData[0].download_url;
+  const transcriptResponse = await fetch(transcriptUrl, {
+    headers: new Headers({
+      Authorization: `Bearer ${token.value}`,
+    }),
+  });
+  const transcriptText = await transcriptResponse.text();
 
-  return new Response(JSON.stringify({ msg: "success", url: transcriptUrl }));
+  return new Response(
+    JSON.stringify({ msg: "success", transcript: transcriptText })
+  );
 }

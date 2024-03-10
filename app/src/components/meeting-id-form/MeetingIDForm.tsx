@@ -5,10 +5,7 @@ import useLocalStorage from "@/hooks/use-local-storage";
 
 const MeetingIDForm = () => {
   const [meetingID, setMeetingID] = useState("");
-  const [transcriptUrl, setTranscriptUrl] = useLocalStorage(
-    "transcript_url",
-    ""
-  );
+  const [_, setTranscript] = useLocalStorage("transcript", "");
 
   const onSubmit = async () => {
     const url = `/api/transcripts?meeting_id=${meetingID}`;
@@ -16,7 +13,7 @@ const MeetingIDForm = () => {
       const res = await fetch(url);
       if (res.ok) {
         const resData = await res.json();
-        setTranscriptUrl(resData.url);
+        setTranscript(resData.transcript);
       }
     } catch (error) {
       console.error(error);
