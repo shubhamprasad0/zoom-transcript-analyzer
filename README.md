@@ -13,8 +13,8 @@ Find usage instructions [here.](./DOCUMENTATION.md)
 - Now, user can give a meeting id on the UI. The frontend calls a backend endpoint (say `GET /transcripts?meeting_id={meetingId}`) with the meeting id and the access token.
 - backend fetches the trancript using zoom API, saves it in a mongodb collection (for future usage) and returns the transcript to the client.
 - Frontend can then ask the backend to extract questions out of the transcript using another backend endpoint (say `GET /transcripts/{id}/questions`). The js backend calls the python service to do the actual operation. The python service fetches the transcript from mongodb, runs its NLP algorithm(s) over the transcript and then returns the extracted questions to the js backend. The js backend then forwards them to the frontend for rendering.
-- The python service can use NLP text processing libraries like spacy / NLTK to extract sentences from the transcript. It can then detect question words like "What", "Where", "How", "When", etc. to figure out if the sentence is a question. First target is to complete the application end-to-end using this heuristic model, and then improve upon it using some advanced pretrained NLP models like BERT (if available for this task). Once we have extracted sentences from the transcript, it can be seen as a classification task of whether a sentence is a question or not. I still need to figure out if I can find an open source pretrained model for this task, or do I need to train such a model on my own. Will try to avoid training model as of now due to time constraints, as I'll need to prepare a dataset first. Will take the model related decision after seeing how the heuristic algorithm works in practice.
-- I plan to dockerize these applications and provide a docker compose file so that it's easy to start and stop the services. It will also make getting started on the project easier.
+- ~~The python service can use NLP text processing libraries like spacy / NLTK to extract sentences from the transcript. It can then detect question words like "What", "Where", "How", "When", etc. to figure out if the sentence is a question. First target is to complete the application end-to-end using this heuristic model, and then improve upon it using some advanced pretrained NLP models like BERT (if available for this task). Once we have extracted sentences from the transcript, it can be seen as a classification task of whether a sentence is a question or not. I still need to figure out if I can find an open source pretrained model for this task, or do I need to train such a model on my own. Will try to avoid training model as of now due to time constraints, as I'll need to prepare a dataset first. Will take the model related decision after seeing how the heuristic algorithm works in practice.~~ (Ended up using HuggingFace inference endpoint instead, so didn't actually created any python service)
+- ~~I plan to dockerize these applications and provide a docker compose file so that it's easy to start and stop the services. It will also make getting started on the project easier.~~ (Didn't get time for this)
 
 # TODOs
 
@@ -40,7 +40,7 @@ Find usage instructions [here.](./DOCUMENTATION.md)
   - [x] Fix build error for deployment on vercel.
   - [ ] Break dialogues into smaller sentences before passing to model.
 
-  - **Step 3: Improve usability**
-    - [x] Write doc for local setup and usage
-    - [ ] Fix cookie not set error in vercel deployment
-    - [x] Write improvements needed
+- **Step 3: Improve usability**
+  - [x] Write doc for local setup and usage
+  - [ ] Fix cookie not set error in vercel deployment
+  - [x] Write improvements needed
