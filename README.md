@@ -43,4 +43,4 @@ Find usage instructions [here.](./DOCUMENTATION.md)
   - **Step 3: Improve usability**
     - [x] Write doc for local setup and usage
     - [ ] Fix cookie not set error in vercel deployment
-    - [ ] Write improvements needed
+    - [x] Write improvements needed

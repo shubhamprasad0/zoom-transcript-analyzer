@@ -38,3 +38,13 @@ npm run dev
 2. Login with your Zoom account. (In case the login button doesn't disappear after login, refresh the page)
 3. Enter meeting ID (without spaces) which has a recording on the zoom cloud. (Only paid zoom acccounts can have cloud recordings). Cloud recordings can be checked [here.](https://zoom.us/recording)
 4. The UI should update with transcript and questions.
+
+
+# Potential Improvements
+
+1. Transcripts can be saved in a database against the meeting id to avoid calling the zoom api again for fetching transcripts.
+2. Error handling can be much better. Currently, many edge cases can cause the app to fail as a lot of the code assumes the APIs will work as expected (due to time constraints).
+3. Had plans to try different preprocessing techniques (using spacy or NLTK) to better identify sentences. The current implementation is just a crude implementation using regex.
+4. Had also planned a separate python service for ML and containerized applications (skipped due to time constraints). So, instead ended up using the HuggingFace inference endpoint. Potential for improvement by finetuning the model on custom data.
+4. Have skipped adding tests (unit and integration tests)
+5. Had planned to deploy on vercel to make usage easier; this would have allowed anyone to directly use the app without setting up a zoom oauth app or huggingface app. (Facing issue here as token is not getting set properly in vercel env, need to debug that)
