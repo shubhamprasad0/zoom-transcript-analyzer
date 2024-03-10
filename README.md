@@ -26,7 +26,9 @@ Analyze and extract relevant information from zoom transcripts
 
 - **Step 2: Get meeting transcript and questions from the transcript**
   - [x] Add text box and submit button on UI when logged in for user to enter meeting id
-  - [ ] Create backend endpoint to get meeting details using zoom API
+  - [x] Create backend endpoint to get transcript url from zoom API.
+  - [x] Save transcript url in browser local storage.
+  - [ ] Download transcript using URL and show trannscript on the frontend.
   - [ ] Create python service with question identification algorithm (dummy for now)
-  - [ ] Once we get transcript from zoom API, pass this transcript to python service and get the questions out. (Plan was to save transcript in a database, and have a separate backend endpoint to get questions using the transcript's id stored in the db. Just combining these two now due to time constraint.)
-  - [ ] Get questions from python service and return the complete transcript and the questions to the frontend.
+  - [ ] Pass this transcript url to python service and extract questions from the transcript. (Plan was to save transcript in a database, and have a separate backend endpoint to get questions using the transcript's id stored in the db. Skipping database now due to time constraint.)
+  - [ ] Get questions from python service and return the questions to the frontend.
