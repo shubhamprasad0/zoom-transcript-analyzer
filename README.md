@@ -25,7 +25,7 @@ Analyze and extract relevant information from zoom transcripts
   - [x] Handle logged in state in client
 
 - **Step 2: Get meeting transcript and questions from the transcript**
-  - [ ] Add text box and submit button on UI when logged in for user to enter meeting id
+  - [x] Add text box and submit button on UI when logged in for user to enter meeting id
   - [ ] Create backend endpoint to get meeting details using zoom API
   - [ ] Create python service with question identification algorithm (dummy for now)
   - [ ] Once we get transcript from zoom API, pass this transcript to python service and get the questions out. (Plan was to save transcript in a database, and have a separate backend endpoint to get questions using the transcript's id stored in the db. Just combining these two now due to time constraint.)

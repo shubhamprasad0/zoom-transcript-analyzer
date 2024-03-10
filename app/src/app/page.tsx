@@ -1,4 +1,5 @@
 "use client";
+import MeetingIDForm from "@/components/meeting-id-form/MeetingIDForm";
 import { Button } from "@/components/ui/button";
 import useCookie from "@/hooks/use-cookie";
 import { useRouter } from "next/navigation";
@@ -22,7 +23,9 @@ export default function Home() {
           <Button className="font-bold" onClick={onZoomLoginClick}>
             Login with Zoom
           </Button>
-        ) : null}
+        ) : (
+          <MeetingIDForm />
+        )}
       </div>
     </main>
   );
