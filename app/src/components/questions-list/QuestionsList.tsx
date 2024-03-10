@@ -1,7 +1,4 @@
-import useLocalStorage from "@/hooks/use-local-storage";
-
-const QuestionsList = () => {
-  const [questions, _] = useLocalStorage("questions", []);
+const QuestionsList = ({ questions }: { questions: string[] }) => {
   return (
     <div>
       <h1 className="text-2xl font-bold">Questions</h1>

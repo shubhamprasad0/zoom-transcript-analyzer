@@ -5,10 +5,13 @@ import TranscriptViewer from "@/components/transcript-viewer/TranscriptViewer";
 import { Button } from "@/components/ui/button";
 import useCookie from "@/hooks/use-cookie";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
   const router = useRouter();
   const token = useCookie("token");
+  const [questions, setQuestions] = useState<string[]>([]);
+  const [transcript, setTranscript] = useState("");
 
   const onZoomLoginClick = () => {
     const ZOOM_AUTH_URL = process.env.NEXT_PUBLIC_ZOOM_AUTH_URL;
@@ -27,9 +30,12 @@ export default function Home() {
           </Button>
         ) : (
           <>
-            <MeetingIDForm />
-            <TranscriptViewer />
-            <QuestionsList />
+            <MeetingIDForm
+              setQuestions={setQuestions}
+              setTranscript={setTranscript}
+            />
+            <TranscriptViewer transcript={transcript} />
+            <QuestionsList questions={questions} />
           </>
         )}
       </div>
