@@ -1,6 +1,9 @@
 # zoom-transcript-analyzer
 Analyze and extract relevant information from zoom transcripts
 
+## Usage
+Find usage instructions [here.](./DOCUMENTATION.md)
+
 ## Architecture and Plan of Action
   
 - Main application to be developed in Next.js (for frontend and backend)
@@ -38,6 +41,6 @@ Analyze and extract relevant information from zoom transcripts
   - [ ] Break dialogues into smaller sentences before passing to model.
 
   - **Step 3: Improve usability**
-    - [ ] Write doc for local setup and usage
+    - [x] Write doc for local setup and usage
     - [ ] Fix cookie not set error in vercel deployment
     - [ ] Write improvements needed
