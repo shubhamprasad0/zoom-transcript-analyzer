@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -47,5 +48,8 @@ export async function POST(request: NextRequest) {
   }
 
   const responseData = await res.json();
-  return new Response(JSON.stringify({ token: responseData.access_token }));
+  cookies().set("token", responseData.access_token, {
+    maxAge: responseData.expires_in,
+  });
+  return new Response(JSON.stringify({ msg: "Authenticated successfully" }));
 }

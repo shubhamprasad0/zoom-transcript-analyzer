@@ -21,4 +21,5 @@ Analyze and extract relevant information from zoom transcripts
   - [x] Create app on zoom marketplace for oauth
   - [x] Complete frontend flow to get authorization code from zoom using oauth
   - [x] Create backend endpoint to get access token from zoom
-  - [ ] Call backend endpoint and get access token, save it in cookie
+  - [x] Call backend endpoint and get access token, save it in cookie (backend sets it in cookie)
+  - [ ] Handle logged in state in client

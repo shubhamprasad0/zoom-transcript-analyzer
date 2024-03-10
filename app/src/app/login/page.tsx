@@ -1,7 +1,7 @@
 "use client";
 import { Spinner } from "@/components/ui/spinner";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Login() {
   const searchParams = useSearchParams();
@@ -18,13 +18,9 @@ export default function Login() {
 
     const code = searchParams.get("code");
     if (code) {
-      getToken(code)
-        .then(({ token }) => {
-          console.log(token);
-        })
-        .catch((err) => {
-          console.log("Error in login: ", err);
-        });
+      getToken(code).catch((err) => {
+        console.log("Error in login: ", err);
+      });
     }
     router.push("/");
     // eslint-disable-next-line react-hooks/exhaustive-deps
